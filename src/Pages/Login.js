@@ -1,18 +1,24 @@
-import React, { Component,useState } from 'react';
+import React, {Component, useState, useEffect} from 'react';
 import {
-  View, Text, Image, SafeAreaView, Dimensions,
+  View,
+  Text,
+  Image,
+  SafeAreaView,
+  Dimensions,
   TouchableOpacity,
-  ScrollView
+  ScrollView,
 } from 'react-native';
 
-import {connect, } from 'react-redux';
-import {Input, Button, CheckBox  } from '../Components'
+import {connect} from 'react-redux';
+import {Input, Button, CheckBox} from '../Components';
 import {loginAction} from '../Actions';
 
 const Login = (props) => {
   const [username, setUsername] = useState('hey@test.com');
   const [password, setPassword] = useState('1234');
   const [isShowPassword, setisShowPassword] = useState(false);
+
+
   return (
     <SafeAreaView style={{flex: 1}}>
       <ScrollView contentContainerStyle={{flex: 1}}>
@@ -48,7 +54,7 @@ const Login = (props) => {
             <CheckBox
               text="Hide Password"
               status={isShowPassword}
-              onPress={() => setisShowPassword( !isShowPassword)}
+              onPress={() => setisShowPassword(!isShowPassword)}
             />
 
             <TouchableOpacity>
@@ -60,13 +66,14 @@ const Login = (props) => {
 
           <Button
             text={'Login'}
+            loading={props.loading}
             onPress={() => {
-              const params={
-                email:username,
-                password:password,
-              }
+              const params = {
+                email: username,
+                password: password,
+              };
               props.loginAction(params);
-              props.navigation.navigate('TabNav')
+              props.navigation.navigate('TabNav');
             }}
           />
 
@@ -97,7 +104,11 @@ const Login = (props) => {
           ]}>
           <Text style={styles.mainText}>
             Don't have an account?
-            <Text style={styles.blueText}> Sign Up</Text>
+            
+              <Text 
+              onPress={()=> props.navigation.navigate('Register')}
+              style={styles.blueText}> Sign Up</Text>
+          
           </Text>
         </View>
       </ScrollView>
@@ -105,20 +116,18 @@ const Login = (props) => {
   );
 };
 
-
 const styles = {
-  mainText: { color: 'gray' },
-  blueText: { color: '#4495cb', fontWeight: 'bold' },
-  subContainer: { alignItems: 'center', justifyContent: 'center', },
-  logo: { width: 200, height: 100, },
-  facebook: { width: 30, height: 30 },
-  line: { width: '35%', height: 0.5, backgroundColor: 'gray' }
-
-}
+  mainText: {color: 'gray'},
+  blueText: {color: '#4495cb', fontWeight: 'bold'},
+  subContainer: {alignItems: 'center', justifyContent: 'center'},
+  logo: {width: 200, height: 100},
+  facebook: {width: 30, height: 30},
+  line: {width: '35%', height: 0.5, backgroundColor: 'gray'},
+};
 
 const mapStateToProps = (state) => {
-    const {list} = state.listResponse;
-    return {list};
-  };
-  
-  export default connect(mapStateToProps, { loginAction,})(Login);
+  const {loading,user} = state.AuthResponse;
+  return {loading,user};
+};
+
+export default connect(mapStateToProps, {loginAction})(Login);

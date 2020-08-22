@@ -1,7 +1,11 @@
 import { combineReducers } from 'redux';
 import AuthReducers from './AuthReducers';
+import ListReducers from './ListReducers';
+
 
 export default combineReducers({
-    listResponse: AuthReducers
+    AuthResponse: AuthReducers,
+    ListResponse: ListReducers
+
     
 });

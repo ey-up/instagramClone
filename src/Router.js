@@ -6,6 +6,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Login from './Pages/Login';
 import Feed from './Pages/Feed';
 import Settings from './Pages/Settings';
+import Register from './Pages/Register';
 import Search from './Pages/Search';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
@@ -119,6 +120,7 @@ function Router() {
       <Stack.Navigator>
         <Stack.Screen name="Login" component={Login} options={{title:'Login'}}/>
         <Stack.Screen name="TabNav" component={TabNav} options={{ title:'Feed'}} />
+        <Stack.Screen name="Register" component={Register} options={{ title:'Register'}} />
       </Stack.Navigator>
     </NavigationContainer>
   );
