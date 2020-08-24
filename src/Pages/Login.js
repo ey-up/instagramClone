@@ -9,6 +9,7 @@ import {
   ScrollView,
 } from 'react-native';
 
+import * as RootNavigation from '../RootNavigation';
 import {connect} from 'react-redux';
 import {Input, Button, CheckBox} from '../Components';
 import {loginAction} from '../Actions';
@@ -73,7 +74,7 @@ const Login = (props) => {
                 password: password,
               };
               props.loginAction(params);
-              props.navigation.navigate('TabNav');
+              //props.navigation.navigate('TabNav');
             }}
           />
 
@@ -106,7 +107,7 @@ const Login = (props) => {
             Don't have an account?
             
               <Text 
-              onPress={()=> props.navigation.navigate('Register')}
+              onPress={()=> RootNavigation.navigate('Register')}
               style={styles.blueText}> Sign Up</Text>
           
           </Text>

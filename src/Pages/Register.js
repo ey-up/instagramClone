@@ -16,17 +16,18 @@ import {registerAction} from '../Actions';
 
 const {width, height} = Dimensions.get('window');
 const Register = (props) => {
-  const [email, setEmail] = useState('hey@test.com');
-  const [password, setPassword] = useState('1234');
-  const [first, setFirst] = useState('heyo');
-  const [last, setLast] = useState('heys');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [first, setFirst] = useState('');
+  const [last, setLast] = useState('');
 
   return (
     <SafeAreaView style={styles.subContainer}>
       <Input
-        placeholder="Email"
+        placeholder="test@test.com"
         style={{marginTop: 20}}
         value={email}
+        keyboardType={'email-address'}
         onChangeText={(value) => setEmail(value)}
       />
       <Input
@@ -48,17 +49,17 @@ const Register = (props) => {
         onChangeText={(value) => setLast(value)}
       />
       <Button
+        loading={props.loading}
         style={{height: height * 0.07, marginTop: 11}}
         text={'Register'}
         onPress={() => {
-            const params={
-                email,
-                password,
-                firstName:first,
-                lastName:last,
-            }
-            props.registerAction(params);
-          props.navigation.navigate('TabNav');
+          const params = {
+            email,
+            password,
+            firstName: first,
+            lastName: last,
+          };
+          props.registerAction(params);
         }}
       />
     </SafeAreaView>
@@ -67,7 +68,6 @@ const Register = (props) => {
 const styles = StyleSheet.create({
   subContainer: {alignItems: 'center', justifyContent: 'center'},
 });
-
 
 const mapStateToProps = (state) => {
   const {loading, user} = state.AuthResponse;
