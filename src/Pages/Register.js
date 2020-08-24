@@ -49,16 +49,17 @@ const Register = (props) => {
         onChangeText={(value) => setLast(value)}
       />
       <Button
+        loading={props.loading}
         style={{height: height * 0.07, marginTop: 11}}
         text={'Register'}
         onPress={() => {
-            const params={
-                email,
-                password,
-                firstName:first,
-                lastName:last,
-            }
-            props.registerAction(params);
+          const params = {
+            email,
+            password,
+            firstName: first,
+            lastName: last,
+          };
+          props.registerAction(params);
         }}
       />
     </SafeAreaView>
@@ -67,7 +68,6 @@ const Register = (props) => {
 const styles = StyleSheet.create({
   subContainer: {alignItems: 'center', justifyContent: 'center'},
 });
-
 
 const mapStateToProps = (state) => {
   const {loading, user} = state.AuthResponse;
