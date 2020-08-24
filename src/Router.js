@@ -8,6 +8,7 @@ import Feed from './Pages/Feed';
 import Settings from './Pages/Settings';
 import Register from './Pages/Register';
 import Search from './Pages/Search';
+import { navigationRef } from './RootNavigation';
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
@@ -51,8 +52,8 @@ function TabNav({navigation}) {
             />
           ),
         }}
-        name="Feed3"
-        component={Feed}
+        name="Search"
+        component={Search}
       />
 
       <Tab.Screen
@@ -69,8 +70,8 @@ function TabNav({navigation}) {
             />
           ),
         }}
-        name="Feed4"
-        component={Feed}
+        name="Search1"
+        component={Search}
       />
 
       <Tab.Screen
@@ -87,8 +88,8 @@ function TabNav({navigation}) {
             />
           ),
         }}
-        name="ss"
-        component={Feed}
+        name="Search2"
+        component={Search}
       />
 
       <Tab.Screen
@@ -106,8 +107,8 @@ function TabNav({navigation}) {
             />
           ),
         }}
-        name="Search"
-        component={Search}
+        name="Settings"
+        component={Settings}
       />
     </Tab.Navigator>
   );
@@ -116,10 +117,10 @@ function TabNav({navigation}) {
 const Stack = createStackNavigator();
 function Router() {
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       <Stack.Navigator>
-        <Stack.Screen name="Login" component={Login} options={{title:'Login'}}/>
-        <Stack.Screen name="TabNav" component={TabNav} options={{ title:'Feed'}} />
+        <Stack.Screen name="Login" component={Login} options={{title:'Login' , headerShown: false}}/>
+        <Stack.Screen name="TabNav" component={TabNav} options={{ title:'Feed',headerShown: false}} />
         <Stack.Screen name="Register" component={Register} options={{ title:'Register'}} />
       </Stack.Navigator>
     </NavigationContainer>
